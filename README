@@ -1,1 +1,12 @@
+Projeto de Estudo:
 
+Tecnologias:
+.NET 6
+node: 16.17.1
+angular cli: 14.2.5
+Sql Server
+
+Para configurar o ambiente:
+Execute os scripts do banco de dados presentes no repositório.
+Verifique a string de coneção no arquivo appsettings.json no projeto Estudo.Api
+Execute o comando npm intall no diretório Estudo.UI
