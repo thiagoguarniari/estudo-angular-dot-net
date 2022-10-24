@@ -1,0 +1,71 @@
+<div class="container">
+    <h1 class="center">Manage Lead</h1>
+
+    <div class="card outer-card-style offset-md-3 col-sm-6">
+        <div class="card-body">
+            <div class="btn-group center">
+                <input mdbRadio type="radio" class="btn-check " name="option" value="invited"
+                id="invitedOption" autocomplete="off" [checked]="true" (change)="loadCards($event)"/>
+                <label class="btn btn-outline-primary button-background" for="invitedOption">Invited</label>
+
+                <input mdbRadio type="radio" class="btn-check" name="option" value="accepted"
+                id="acceptedOption" autocomplete="off" (change)="loadCards($event)"/>
+                <label class="btn btn-outline-primary  button-background" for="acceptedOption">Accepted</label>
+            </div>
+
+            <div>
+                <div *ngFor="let lead of leadsList" class="card inner-card-style my-4">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="bg-primary rounded-circle border d-flex justify-content-center align-items-center lead-circle col-sm-1" alt="Avatar">
+                                <span class="lead-circle-text">{{ getFirstLetter(lead.firstName) }}</span>
+                            </div>
+                            <span class="col-sm-11">
+                                <span *ngIf="selectedTab == 'invited'">
+                                    <b>{{ lead.firstName }}</b><br/>
+                                </span>
+                                <span *ngIf="selectedTab == 'accepted'">
+                                    <b>{{ lead.firstName }} {{ lead.lastName }}</b><br/>
+                                </span>
+                                <span>{{ lead.dateCreated | date: 'MMM d y @ h:mm a'}}</span>
+                            </span>
+                        </div>
+                        <hr>
+                        <p>
+                            <span>
+                                <i class="fa-solid fa-location-dot"></i>
+                                {{ lead.suburb }}
+                            </span>
+                            <span class="mx-4">
+                                <i class="fa-solid fa-briefcase"></i>
+                                {{ lead.category }}
+                            </span>
+                            <span>Job ID: {{ lead.jobId }}</span>
+                        </p>
+                        <hr>
+                        <p *ngIf="selectedTab == 'accepted'">
+                            <span>
+                                <i class="fa-solid fa-phone"></i>
+                                {{ lead.phoneNumber }}
+                            </span>
+                            <span class="mx-4">
+                                <i class="fa-solid fa-envelope"></i>
+                                {{ lead.email }}
+                            </span>
+                        </p>
+                        <p>
+                            <span>{{ lead.description }}</span>
+                        </p>
+                        <div *ngIf="selectedTab == 'invited'">
+                            <hr>
+                            <button type="button" class="btn btn-primary" (click)="acceptLead(lead.id)">Accept</button>
+                            <button type="button" class="btn btn-secondary mx-3" (click)="declineLead(lead.id)">Decline</button>
+                            <span class="mx-2" style="font-weight: bold;">{{ lead.price | currency }}</span>
+                            <span>Lead Invitation</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
